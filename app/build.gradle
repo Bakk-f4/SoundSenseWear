@@ -45,4 +45,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     // Import the Audio Task Library dependency (NNAPI is included)
     implementation 'org.tensorflow:tensorflow-lite-task-audio:0.4.0'
+
+    //for notification
+    implementation "androidx.core:core:1.6.0"
+
+
+
 }
