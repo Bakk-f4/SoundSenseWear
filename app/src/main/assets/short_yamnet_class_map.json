@@ -1,0 +1,27 @@
+[
+  {
+    "index": 0,
+    "display_name": "-Select your categories-"
+  },
+  {
+  "index": 1,
+  "display_name": "Speech"
+},{
+  "index": 2,
+  "display_name": "Dog"
+},{
+  "index": 3,
+  "display_name": "Clapping"
+},{
+  "index": 4,
+  "display_name": "Microwave oven"
+},
+  {
+    "index": 4,
+    "display_name": "Beep, bleep"
+  },
+  {
+    "index": 320,
+    "display_name": "Motorcycle"
+  }
+]

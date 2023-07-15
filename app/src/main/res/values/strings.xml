@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">SoundSenseWear</string>
+    <string name="send_plain_text_email">Send plain text email</string>
+    <string name="send_html_email">Send html email</string>
+    <string name="send_email_with_attachment">Send email with attachment</string>
+    <string name="sending_email">Sending email…</string>
+    <string name="msg_email_sent_successfully">Your message was sent successfully.</string>
+    <string name="msg_error_sending_email">Oops, error sending email.</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>
