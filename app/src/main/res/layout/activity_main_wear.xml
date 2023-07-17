@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.DismissibleFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_dismiss_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/test_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:text="SoundSense"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:onClick="onGoToAudioActivity"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:srcCompat="@drawable/wave" />
+
+
+</androidx.wear.widget.DismissibleFrameLayout>
