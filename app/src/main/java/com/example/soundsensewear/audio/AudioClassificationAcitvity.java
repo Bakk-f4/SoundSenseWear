@@ -65,8 +65,8 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
         createNotificationChannel();
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        emailTo = sharedPreferences.getString("email", "");
-        userName = sharedPreferences.getString("name", "utente");
+        //emailTo = sharedPreferences.getString("email", "");
+        //userName = sharedPreferences.getString("name", "utente");
 
         MINUTES *= Integer.parseInt(sharedPreferences.getString("timeout", "1"));
         userClassification = new HashMap<String, Long>();
@@ -100,10 +100,12 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
     @Override
     public void startRecording(View view) {
         super.startRecording(view);
+        /*
         TensorAudio.TensorAudioFormat format = audioClassifier.getRequiredTensorAudioFormat();
         String specs = "Number of channels: " + format.getChannels() + "\n" +
                 "Sample Rate: " + format.getSampleRate();
         tvSpecs.setText(specs);
+        */
         audioRecord = audioClassifier.createAudioRecord();
         audioRecord.startRecording();
 

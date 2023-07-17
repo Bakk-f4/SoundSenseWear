@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.wear.widget.DismissibleFrameLayout;
 
 import com.example.soundsensewear.R;
 
@@ -26,10 +27,10 @@ public class AudioHelperActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_audio_helper);
+        setContentView(R.layout.activity_audio_helper_wear);
 
         tvOutput = findViewById(R.id.tvAudioOutput);
-        tvSpecs = findViewById(R.id.tvAudioSpecs);
+        //tvSpecs = findViewById(R.id.tvAudioSpecs);
         bttStartRecording = findViewById(R.id.bttStartRecording);
         bttStopRecording = findViewById(R.id.bttStopRecording);
         bttSettings = findViewById(R.id.bttSettings);
@@ -60,4 +61,5 @@ public class AudioHelperActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
 }

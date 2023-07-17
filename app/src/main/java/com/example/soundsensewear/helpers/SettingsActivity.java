@@ -34,12 +34,13 @@ import java.util.regex.Pattern;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private EditText editTextEmail, editTextName, editTextSurname, editTextTimeout;
+    private EditText /* editTextEmail, editTextName, editTextSurname, */ editTextTimeout;
     private Button buttonSubmit;
     private Button buttonReset;
+    /*
     private String email;
     private String name;
-    private String surname;
+    private String surname;*/
     private String timeout;
     private SharedPreferences sharedPreferences;
     private  ArrayAdapter<String> adapter;
@@ -58,9 +59,11 @@ public class SettingsActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
 
         //initialize UI objects
+        /*
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextName = findViewById(R.id.editTextName);
         editTextSurname = findViewById(R.id.editTextSurname);
+        */
         editTextTimeout = findViewById(R.id.editTextTimeOutEmail);
         buttonSubmit = findViewById(R.id.buttonSubmit);
         buttonReset = findViewById(R.id.bttReset);
@@ -154,13 +157,16 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         //update the UI objects
+        /*
         email = sharedPreferences.getString("email", "");
         name = sharedPreferences.getString("name", "");
         surname = sharedPreferences.getString("surname", "");
-        timeout = sharedPreferences.getString("timeout", "");
         editTextEmail.setText(email);
         editTextName.setText(name);
         editTextSurname.setText(surname);
+        */
+        timeout = sharedPreferences.getString("timeout", "");
+
         editTextTimeout.setText(timeout);
 
 
@@ -168,26 +174,28 @@ public class SettingsActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
+
                 email = editTextEmail.getText().toString().trim();
                 name = editTextName.getText().toString().trim();
                 surname = editTextSurname.getText().toString().trim();
+
+                 */
                 timeout = editTextTimeout.getText().toString().trim();
                 if(!isNumber(timeout)){
                     Toast.makeText(SettingsActivity.this, "Insert a valid number for Timeout", Toast.LENGTH_LONG).show();
                     timeout = "";
                 }
-                if(!validateEmail(email)){
-                    Toast.makeText(SettingsActivity.this, "Insert a valid email for example your@email.com", Toast.LENGTH_LONG).show();
-                    email = "";
-                }
-                if (email.isEmpty() || timeout.isEmpty()) {
-                    Toast.makeText(SettingsActivity.this, "Inserisci tutti i campi", Toast.LENGTH_SHORT).show();
+                if (timeout.isEmpty()) {
+                    Toast.makeText(SettingsActivity.this, "Insert a timeout", Toast.LENGTH_SHORT).show();
                 } else {
                     //memorizzo le preferenze del client in modo permanente
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                    /*
                     editor.putString("name", name);
                     editor.putString("surname", surname);
                     editor.putString("email", email);
+                    */
                     editor.putString("timeout", timeout);
                     editor.apply();
 
