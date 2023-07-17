@@ -35,12 +35,15 @@ import java.util.regex.Pattern;
 public class SettingsActivity extends AppCompatActivity {
 
     private EditText /* editTextEmail, editTextName, editTextSurname, */ editTextTimeout;
-    private Button buttonSubmit;
+    private Button buttonSubmit, buttonCategories;
     private Button buttonReset;
+
     /*
     private String email;
     private String name;
-    private String surname;*/
+    private String surname;
+    */
+
     private String timeout;
     private SharedPreferences sharedPreferences;
     private  ArrayAdapter<String> adapter;
@@ -59,14 +62,17 @@ public class SettingsActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
 
         //initialize UI objects
+
         /*
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextName = findViewById(R.id.editTextName);
         editTextSurname = findViewById(R.id.editTextSurname);
         */
+
         editTextTimeout = findViewById(R.id.editTextTimeOutEmail);
         buttonSubmit = findViewById(R.id.buttonSubmit);
         buttonReset = findViewById(R.id.bttReset);
+        buttonCategories = findViewById(R.id.bttCategories);
 
         String userCategories = sharedPreferences.getString("UserCategories", "");
         if(userCategories.equals(""))
@@ -236,6 +242,14 @@ public class SettingsActivity extends AppCompatActivity {
                 buttonReset.setEnabled(false);
             }
         });
+        /*
+        //when use press categories button
+        buttonCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    onGoToAudioClassificationActivity2(v);
+                }
+        });*/
     }
     
     public void onGoToAudioClassificationActivity(View view){
@@ -243,6 +257,14 @@ public class SettingsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AudioClassificationAcitvity.class);
         startActivity(intent);
     }
+
+    /*
+    public void onGoToSettingsListActivity(View view){
+        // start the audio helper activity
+        Intent intent = new Intent(this, SettingsListActivity.class);
+        startActivity(intent);
+    } */
+
 
     public static boolean validateEmail(String email) {
         String EMAIL_PATTERN =

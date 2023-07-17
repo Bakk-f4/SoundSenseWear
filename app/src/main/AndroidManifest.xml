@@ -24,6 +24,10 @@
         <activity
             android:name=".helpers.SettingsActivity"/>
         <activity
+            android:name=".helpers.SettingsListActivity"/>
+        <activity
+            android:name=".helpers.SettingsActivityWear"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

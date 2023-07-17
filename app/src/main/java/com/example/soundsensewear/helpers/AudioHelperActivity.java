@@ -62,4 +62,10 @@ public class AudioHelperActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onGoToSettingsWear(View view){
+        // start the audio helper activity
+        Intent intent = new Intent(this, SettingsActivityWear.class);
+        startActivity(intent);
+    }
+
 }

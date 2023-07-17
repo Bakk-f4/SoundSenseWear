@@ -118,4 +118,17 @@
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toEndOf="@+id/spinnerCategory" />
 
+    <Button
+        android:id="@+id/bttCategories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        android:onClick="onGoToAudioClassificationActivity2"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bttReset"
+        app:layout_constraintVertical_bias="0.52" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

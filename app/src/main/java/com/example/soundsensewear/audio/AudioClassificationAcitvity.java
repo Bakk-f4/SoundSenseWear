@@ -1,7 +1,6 @@
 package com.example.soundsensewear.audio;
 
 import android.Manifest;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -51,7 +50,7 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
     private TensorAudio tensorAudio;
     //var per temporizzare l' invio delle email
     private long lastCallTime = 0;
-    private static long MINUTES = 60 * 1000; // minuti in millisecondi
+    private static long minutes = 1000; // minuti in millisecondi
 
     private String objectOfAudio;
     private String emailTo, userName, emailBody, eventTime;
@@ -68,7 +67,7 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
         //emailTo = sharedPreferences.getString("email", "");
         //userName = sharedPreferences.getString("name", "utente");
 
-        MINUTES *= Integer.parseInt(sharedPreferences.getString("timeout", "1"));
+        minutes *= sharedPreferences.getInt("timeout", 60);
         userClassification = new HashMap<String, Long>();
 
         //prendiamo dalla sharedPrefence le categorie dell' utente
@@ -226,7 +225,7 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
 
     public Boolean checkTime(String category){
         long currentTime = System.currentTimeMillis();
-        if ((currentTime - userClassification.get(category)) > MINUTES) {
+        if ((currentTime - userClassification.get(category)) > minutes) {
             // Aggiorna il tempo dell'ultima chiamata
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 userClassification.replace(category, currentTime);
@@ -235,7 +234,7 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
         }
         // La funzione non può essere chiamata perché sono passati meno di 5 minuti
         Log.i(TAG, "EMAIL TIMEOUT NON ANCORA TERMINATO");
-        Log.i(TAG, (currentTime - userClassification.get(category) > MINUTES) +"");
+        Log.i(TAG, (currentTime - userClassification.get(category) > minutes) +"");
         return false;
 
     }

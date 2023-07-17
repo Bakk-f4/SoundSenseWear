@@ -13,7 +13,7 @@
         android:layout_gravity="right|top"
         android:layout_margin="8dp"
         android:backgroundTint="#00FFFFFF"
-        android:onClick="onGoToSettings"
+        android:onClick="onGoToSettingsWear"
         android:src="@drawable/ic_action_name" />
 
     <TextView
