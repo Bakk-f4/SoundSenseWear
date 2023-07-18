@@ -10,8 +10,8 @@
         android:id="@+id/bttSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:layout_margin="8dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="10sp"
         android:backgroundTint="#00FFFFFF"
         android:onClick="onGoToSettingsWear"
         android:src="@drawable/ic_action_name" />
@@ -21,25 +21,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80sp"
-        android:text="SoundSense" />
+        android:layout_marginTop="50sp"
+        android:text="SoundSense"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/bttStartRecording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
-        android:layout_marginLeft="6sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
         android:onClick="startRecording"
-        android:text="Start" />
+        android:text="Start"
+        app:cornerRadius="30dp" />
 
     <Button
         android:id="@+id/bttStopRecording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginRight="6sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="125dp"
         android:onClick="stopRecording"
-        android:text="Stop" />
+        android:text="Stop"
+        app:cornerRadius="30dp" />
 
 </androidx.wear.widget.DismissibleFrameLayout>

@@ -7,11 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\Bakk\.android\avd\smartwatch_API_30_2.avd" />
+            <value value="C:\Users\Bakk\.android\avd\RoundWearOS_API_30.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-07-17T14:53:46.483523Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-07-18T13:01:29.719840Z" />
   </component>
 </project>
