@@ -163,14 +163,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         //update the UI objects
-        /*
-        email = sharedPreferences.getString("email", "");
-        name = sharedPreferences.getString("name", "");
-        surname = sharedPreferences.getString("surname", "");
-        editTextEmail.setText(email);
-        editTextName.setText(name);
-        editTextSurname.setText(surname);
-        */
         timeout = sharedPreferences.getString("timeout", "");
 
         editTextTimeout.setText(timeout);
@@ -180,13 +172,6 @@ public class SettingsActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-
-                email = editTextEmail.getText().toString().trim();
-                name = editTextName.getText().toString().trim();
-                surname = editTextSurname.getText().toString().trim();
-
-                 */
                 timeout = editTextTimeout.getText().toString().trim();
                 if(!isNumber(timeout)){
                     Toast.makeText(SettingsActivity.this, "Insert a valid number for Timeout", Toast.LENGTH_LONG).show();
@@ -197,11 +182,6 @@ public class SettingsActivity extends AppCompatActivity {
                 } else {
                     //memorizzo le preferenze del client in modo permanente
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    /*
-                    editor.putString("name", name);
-                    editor.putString("surname", surname);
-                    editor.putString("email", email);
-                    */
                     editor.putString("timeout", timeout);
                     editor.apply();
 

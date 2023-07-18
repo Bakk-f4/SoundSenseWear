@@ -4,4 +4,23 @@
     android:layout_height="match_parent"
     android:id="@+id/checkboxContainer"
     android:orientation="vertical">
-</androidx.wear.widget.DismissibleFrameLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp">
+
+        <LinearLayout
+            android:id="@+id/checkbox_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contextClickable="false"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+    </androidx.wear.widget.DismissibleFrameLayout>
