@@ -1,5 +1,7 @@
 package com.example.soundsensewear.audio;
 
+import static com.example.soundsensewear.helpers.SettingsListActivity.readJsonFromFile;
+
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,9 +13,10 @@ import android.content.pm.PackageManager;
 import android.media.AudioRecord;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -24,11 +27,13 @@ import com.example.soundsensewear.helpers.AudioHelperActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.tensorflow.lite.support.audio.TensorAudio;
 import org.tensorflow.lite.support.label.Category;
 import org.tensorflow.lite.task.audio.classifier.AudioClassifier;
 import org.tensorflow.lite.task.audio.classifier.Classifications;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -42,69 +47,99 @@ import java.util.TimerTask;
 
 public class AudioClassificationAcitvity extends AudioHelperActivity {
 
+    private TextView tvAudioOutput;
     private String model = "lite-model_yamnet_classification_tflite_1.tflite";
     private final String TAG = "AudioIdentificationActivity";
     private AudioRecord audioRecord;
     private TimerTask timerTask;
     private AudioClassifier audioClassifier;
     private TensorAudio tensorAudio;
-    //var per temporizzare l' invio delle email
-    private long lastCallTime = 0;
     private static long minutes = 1000; // minuti in millisecondi
 
-    private String objectOfAudio;
-    private String emailTo, userName, emailBody, eventTime;
+    private String  eventTime;
     private HashMap<String, Long> userClassification;
+    private Boolean isRecording;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        tvAudioOutput = findViewById(R.id.tvAudioOutput);
+        isRecording = false;
+
         //creazione canale comunicazione per notifiche
         createNotificationChannel();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        //emailTo = sharedPreferences.getString("email", "");
-        //userName = sharedPreferences.getString("name", "utente");
-
-        minutes *= sharedPreferences.getInt("timeout", 60);
-        userClassification = new HashMap<String, Long>();
-
-        //prendiamo dalla sharedPrefence le categorie dell' utente
-        String userCategoriesSharedPreference = sharedPreferences.getString("UserCategories", "");
-        if (!TextUtils.isEmpty(userCategoriesSharedPreference)) {
-            try {
-                Log.i("StringaRitorno", userCategoriesSharedPreference);
-                JSONArray savedJsonArray = new JSONArray(userCategoriesSharedPreference);
-                //per ogni elemento in savedJsonArrayd
-                for (int i = 0; i < savedJsonArray.length(); i++) {
-                    userClassification.put(savedJsonArray.getString(i), 0L);
-                    Log.i("userClassification", savedJsonArray.getString(i));
-                }
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
-        }
         //inizialize audioClassifier from TF model
         try {
             audioClassifier = AudioClassifier.createFromFile(this, model);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         //inizialize audio recorder for classifying audio
         tensorAudio = audioClassifier.createInputTensorAudio();
     }
 
     @Override
-    public void startRecording(View view) {
+    protected void onPause() {
+        super.onPause();
+        View myCurrentView = findViewById(R.id.activity_audio_helper_dismiss_layout);
+        stopRecordingL(myCurrentView);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        tvAudioOutput.setText("SoundSense");
+        initDelayTime();
+        try {
+            initCategories();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void initDelayTime(){
+        //impostazioni delay notifiche (picker)
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+        minutes *= sharedPreferences.getInt("timeout", 60);
+    }
+
+    private void initCategories() throws JSONException, IOException {
+        userClassification = new HashMap<String, Long>();
+
+        //Se il json non esiste nella dir Files lo copio da assets (assets è una dir readonly)
+        File file = new File(this.getFilesDir() + "/short_list_category.json");
+
+        //TODO inserire TAG in giro per il progetto, eliminare try/catch dove possibile
+        if (!file.exists())
+            Toast.makeText(AudioClassificationAcitvity.this, "Please select categories", Toast.LENGTH_LONG).show();
+        else {
+            Log.i("fileList", "il file esiste");
+
+            JSONArray savedJsonArray = null;
+            savedJsonArray = readJsonFromFile(this, "short_list_category.json");
+
+            //per ogni elemento in savedJsonArray
+            for (int i = 0; i < savedJsonArray.length(); i++) {
+                JSONObject jsonObject = savedJsonArray.getJSONObject(i);
+                if (jsonObject.get("checked").toString().equals("true"))
+                    userClassification.put(jsonObject.get("display_name").toString(), 0L);
+
+                Log.i("userClassification", jsonObject.get("display_name").toString());
+            }
+        }
+    }
+
+
+    public void startRecordingL(View view) {
         super.startRecording(view);
-        /*
-        TensorAudio.TensorAudioFormat format = audioClassifier.getRequiredTensorAudioFormat();
-        String specs = "Number of channels: " + format.getChannels() + "\n" +
-                "Sample Rate: " + format.getSampleRate();
-        tvSpecs.setText(specs);
-        */
+        isRecording = true;
+
         audioRecord = audioClassifier.createAudioRecord();
         audioRecord.startRecording();
 
@@ -124,7 +159,6 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
                         categoryLabel = category.getLabel();
                         if (category.getScore() > 0.3f && userClassification.get(categoryLabel) != null) {
                             finalOutput.add(category);
-                            objectOfAudio = categoryLabel;
                             eventTime = getCurrentDateTime();
                             // TODO METTERE VIBRAZIONE
 
@@ -133,7 +167,6 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
                                 myMessage("Abbiamo rilevato un evento audio: " + categoryLabel, category.getIndex());
                                 Log.i("category.getIndex()", "" + category.getIndex());
                             }
-
                         }
                     }
                 }
@@ -161,11 +194,14 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
         new Timer().scheduleAtFixedRate(timerTask, 1, 500);
     }
 
-    @Override
-    public void stopRecording(View view) {
+
+    public void stopRecordingL(View view) {
         super.stopRecording(view);
-        timerTask.cancel();
-        audioRecord.stop();
+        if (isRecording) {
+            timerTask.cancel();
+            audioRecord.stop();
+        }
+        isRecording = false;
     }
 
     public String getCurrentDateTime() {

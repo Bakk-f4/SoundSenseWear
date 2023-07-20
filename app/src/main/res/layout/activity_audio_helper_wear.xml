@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
-        android:onClick="startRecording"
+        android:onClick="startRecordingL"
         android:text="Start"
         app:cornerRadius="30dp" />
 
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="125dp"
-        android:onClick="stopRecording"
+        android:onClick="stopRecordingL"
         android:text="Stop"
         app:cornerRadius="30dp" />
 

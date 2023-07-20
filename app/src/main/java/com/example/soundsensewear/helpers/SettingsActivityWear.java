@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import com.example.soundsensewear.audio.AudioClassificationAcitvity;
 import androidx.core.content.ContextCompat;
 
 import com.example.soundsensewear.R;
@@ -21,11 +23,13 @@ public class SettingsActivityWear extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("cartella", this.getFilesDir().toString());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_wear);
+
 
         //load data from sharedPreference
         sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
@@ -37,6 +41,9 @@ public class SettingsActivityWear extends AppCompatActivity {
         numberPicker.setValue(userDelay);
 
         requestStoragePermissions();
+
+
+
 
 
 

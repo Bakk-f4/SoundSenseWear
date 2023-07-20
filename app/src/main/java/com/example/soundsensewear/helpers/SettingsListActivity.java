@@ -120,14 +120,15 @@ public class SettingsListActivity extends AppCompatActivity {
 
             //Sovrascrive il file JSON con il nuovo JSONArray aggiornato
             writeJSONToFile(context, fileName, jsonArray);
+            Log.i("fileJsonArray", jsonArray.toString());
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public static JSONArray readJsonFromFile(Context context, String filePath) throws IOException, JSONException {
-        InputStream inputStream = context.openFileInput(filePath);
+    public static JSONArray readJsonFromFile(Context context, String fileName) throws IOException, JSONException {
+        InputStream inputStream = context.openFileInput(fileName);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder jsonString = new StringBuilder();
