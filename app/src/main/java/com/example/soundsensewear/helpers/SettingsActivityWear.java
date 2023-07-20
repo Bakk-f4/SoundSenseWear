@@ -23,6 +23,7 @@ public class SettingsActivityWear extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("cartella", this.getFilesDir().toString());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_wear);
 
@@ -62,6 +63,4 @@ public class SettingsActivityWear extends AppCompatActivity {
         int requestCode = 0x100;
         ActivityCompat.requestPermissions(this, permissions, requestCode);
     }
-
-
 }
