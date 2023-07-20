@@ -32,6 +32,9 @@ import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+import com.example.soundsensewear.helpers.AudioHelperActivity;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private EditText /* editTextEmail, editTextName, editTextSurname, */ editTextTimeout;
