@@ -251,7 +251,7 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            // for ActivityCompat#requestPermissions for more details..
             return;
         }
         // notificationId is a unique int for each notification that you must define
