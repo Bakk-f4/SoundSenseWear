@@ -54,11 +54,16 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
     private TimerTask timerTask;
     private AudioClassifier audioClassifier;
     private TensorAudio tensorAudio;
-    private static long minutes = 1000; // minuti in millisecondi
+    private static long minutes;
 
     private String  eventTime;
     private HashMap<String, Long> userClassification;
-    private Boolean isRecording;
+
+
+
+    private static Boolean isRecording;
+
+
 
 
 
@@ -86,27 +91,33 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
     protected void onPause() {
         super.onPause();
         View myCurrentView = findViewById(R.id.activity_audio_helper_dismiss_layout);
-        stopRecordingL(myCurrentView);
+        //stopRecordingL(myCurrentView);
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         tvAudioOutput.setText("SoundSense");
+        View myCurrentView = findViewById(R.id.activity_audio_helper_dismiss_layout);
         initDelayTime();
         try {
             initCategories();
+            if (isRecording){
+                stopRecordingL(myCurrentView);
+                startRecordingL(myCurrentView);
+            }
         } catch (JSONException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     private void initDelayTime(){
         //impostazioni delay notifiche (picker)
         SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        minutes *= sharedPreferences.getInt("timeout", 60);
+        minutes = sharedPreferences.getInt("timeout", 60)*1000;
     }
 
     private void initCategories() throws JSONException, IOException {
@@ -138,10 +149,14 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
 
     public void startRecordingL(View view) {
         super.startRecording(view);
+        if (isRecording)
+            return;
         isRecording = true;
 
         audioRecord = audioClassifier.createAudioRecord();
         audioRecord.startRecording();
+
+
 
         timerTask = new TimerTask() {
             @Override
@@ -164,8 +179,9 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
 
                             if(checkTime(categoryLabel)){
                                 // TODO IMPLEMENTARE CONDIZIONE DAL MENU IMPOSTAZIONI
-                                myMessage("Abbiamo rilevato un evento audio: " + categoryLabel, category.getIndex());
-                                Log.i("category.getIndex()", "" + category.getIndex());
+                                int notificationId = Integer.parseInt(eventTime.replace(":",""));
+                                myMessage("Abbiamo rilevato un evento audio: " + categoryLabel, notificationId);
+                                Log.i("category.getIndex()", "" + notificationId);
                             }
                         }
                     }
@@ -274,5 +290,6 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
         return false;
 
     }
+
 
 }
