@@ -25,8 +25,6 @@
         <activity
             android:name=".audio.AudioClassificationAcitvity"/>
         <activity
-            android:name=".helpers.SettingsActivity"/>
-        <activity
             android:name=".helpers.SettingsListActivity"/>
         <activity
             android:name=".helpers.SettingsActivityWear"/>

@@ -56,12 +56,6 @@ public class AudioHelperActivity extends AppCompatActivity {
         bttStopRecording.setEnabled(false);
     }
 
-    public void onGoToSettings(View view){
-        // start the audio helper activity
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
     public void onGoToSettingsWear(View view){
         // start the audio helper activity
         Intent intent = new Intent(this, SettingsActivityWear.class);
