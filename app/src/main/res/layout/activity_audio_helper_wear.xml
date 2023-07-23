@@ -10,8 +10,7 @@
         android:id="@+id/bttSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="10sp"
+        android:layout_gravity="center_horizontal"
         android:backgroundTint="#00FFFFFF"
         android:onClick="onGoToSettingsWear"
         android:src="@drawable/ic_action_name" />
@@ -21,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50sp"
+        android:layout_marginTop="70sp"
         android:text="SoundSense"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -31,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="110dp"
         android:onClick="startRecordingL"
         android:text="Start"
         app:cornerRadius="30dp" />
@@ -41,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="150dp"
         android:onClick="stopRecordingL"
         android:text="Stop"
         app:cornerRadius="30dp" />
