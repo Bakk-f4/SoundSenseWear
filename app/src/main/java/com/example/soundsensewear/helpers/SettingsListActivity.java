@@ -3,7 +3,6 @@ package com.example.soundsensewear.helpers;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -94,7 +93,6 @@ public class SettingsListActivity extends AppCompatActivity {
                     String id = checkBox.getTag().toString();
 
                     Context context = SettingsListActivity.this;
-                    Log.i("cartellaOnchecked", context.getFilesDir().toString());
                     updateJSONObjectInFile(context, "short_list_category.json", id, "checked", statoCheckbox.toString());
                 }
             });
@@ -105,7 +103,6 @@ public class SettingsListActivity extends AppCompatActivity {
 
     private void updateJSONObjectInFile(Context context, String fileName, String id, String keyToUpdate, String newValue) {
         try {
-            Log.i("cartellaUPDATE", context.getFilesDir().toString());
             // Legge il contenuto del file JSON esistente in una stringa
             JSONArray jsonArray = readJsonFromFile(context, fileName);
 
@@ -120,7 +117,6 @@ public class SettingsListActivity extends AppCompatActivity {
 
             //Sovrascrive il file JSON con il nuovo JSONArray aggiornato
             writeJSONToFile(context, fileName, jsonArray);
-            Log.i("fileJsonArray", jsonArray.toString());
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }

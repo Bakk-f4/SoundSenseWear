@@ -130,7 +130,6 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
         if (!file.exists())
             Toast.makeText(AudioClassificationAcitvity.this, "Please select categories", Toast.LENGTH_LONG).show();
         else {
-            Log.i("fileList", "il file esiste");
 
             JSONArray savedJsonArray = null;
             savedJsonArray = readJsonFromFile(this, "short_list_category.json");
@@ -141,7 +140,6 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
                 if (jsonObject.get("checked").toString().equals("true"))
                     userClassification.put(jsonObject.get("display_name").toString(), 0L);
 
-                Log.i("userClassification", jsonObject.get("display_name").toString());
             }
         }
     }
@@ -155,8 +153,6 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
 
         audioRecord = audioClassifier.createAudioRecord();
         audioRecord.startRecording();
-
-
 
         timerTask = new TimerTask() {
             @Override
@@ -175,13 +171,10 @@ public class AudioClassificationAcitvity extends AudioHelperActivity {
                         if (category.getScore() > 0.3f && userClassification.get(categoryLabel) != null) {
                             finalOutput.add(category);
                             eventTime = getCurrentDateTime();
-                            // TODO METTERE VIBRAZIONE
 
                             if(checkTime(categoryLabel)){
-                                // TODO IMPLEMENTARE CONDIZIONE DAL MENU IMPOSTAZIONI
                                 int notificationId = Integer.parseInt(eventTime.replace(":",""));
                                 myMessage("Abbiamo rilevato un evento audio: " + categoryLabel, notificationId);
-                                Log.i("category.getIndex()", "" + notificationId);
                             }
                         }
                     }

@@ -21,6 +21,56 @@
   "checked": "false"
 },{
   "index": 5,
-  "display_name": "Motorcycle",
+  "display_name": "Ambulance (siren)",
   "checked": "false"
-}]
+},  {
+  "index": 7,
+  "display_name": "Crying, sobbing",
+  "checked": "false"
+},  {
+  "index": 8,
+  "display_name": "Vehicle horn, car horn, honking",
+  "checked": "false"
+},  {
+  "index": 9,
+  "display_name": "Music",
+  "checked": "false"
+},  {
+  "index": 11,
+  "display_name": "Vehicle",
+  "checked": "false"
+},  {
+  "index": 13,
+  "display_name": "Emergency vehicle",
+  "checked": "false"
+},  {
+  "index": 14,
+  "display_name": "Insect",
+  "checked": "false"
+},  {
+  "index": 15,
+  "display_name": "Doorbell",
+  "checked": "false"
+},  {
+  "index": 17,
+  "display_name": "Alarm",
+  "checked": "false"
+},  {
+  "index": 18,
+  "display_name": "Siren",
+  "checked": "false"
+},  {
+  "index": 19,
+  "display_name": "Power tool",
+  "checked": "false"
+},  {
+  "index": 20,
+  "display_name": "Bell",
+  "checked": "false"
+},  {
+  "index": 21,
+  "display_name": "Train",
+  "checked": "false"
+}
+]
+
